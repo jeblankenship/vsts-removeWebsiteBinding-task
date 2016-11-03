@@ -1,0 +1,84 @@
+{
+    "id": "088A3019-563D-483E-8C96-9E4E359CF60F",
+    "name": "removeWebsiteBinding",
+    "friendlyName": "Remove Binding From Web Site On Remote Computer",
+    "description": "Task removes binding from web site on remote computer.",
+	"helpMarkDown": "[More Information](https://github.com/jeblankenship/vsts-removeWebsiteBinding-task#readme)",
+    "category": "Utility",
+    "visibility": [
+        "Build",
+		"Release"
+    ],
+    "author": "James Blankenship",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 1
+    },
+    "minimumAgentVersion": "1.92.0",
+    "inputs": [
+        {
+            "name": "server",
+            "type": "string",
+            "label": "Server",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Server to run command on."
+        },
+        {
+            "name": "webSiteName",
+            "type": "string",
+            "label": "Web Site",
+            "defaultValue": "Default Web Site",
+            "required": true,
+            "helpMarkDown": "Specifies the name of the website to remove binding from."
+        },
+        {
+            "name": "ipAddress",
+            "type": "string",
+            "label": "IP Address",
+            "defaultValue": "*",
+            "required": true,
+            "helpMarkDown": "Specifies the IP address of the binding."
+        },
+        {
+            "name": "port",
+            "type": "string",
+            "label": "Port Number",
+            "defaultValue": "80",
+            "required": true,
+            "helpMarkDown": "Specifies the port for the binding.."
+        },
+        {
+            "name": "hostHeader",
+            "type": "string",
+            "label": "Host Header",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Specifies the host header of the binding."
+        },
+        {
+            "name": "protocol",
+            "type": "pickList",
+            "label": "Protocol",
+            "defaultValue": "http",
+            "required": true,
+            "helpMarkDown": "Specifies the protocol for the binding. This protocol is usually HTTP, HTTPS, or FTP",
+            "options": {
+                "http": "http",
+                "https": "https"
+            }
+        }
+    ],
+    "instanceNameFormat": "Remove Binding From Web Site On Remote Computer",
+    "execution": {
+        "PowerShell": {
+            "target": "$(currentDirectory)\\remove-websitebinding.ps1",
+            "argumentFormat": "",
+            "workingDirectory": "$(System.DefaultWorkingDirectory)"
+		}
+    },
+    "messages": {
+        "failed": "Remove binding failed."
+    }
+}
